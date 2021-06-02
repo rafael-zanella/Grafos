@@ -21,16 +21,14 @@
 // //novoGrafo.exibirGrafo();
 
 
-const warshallGraph = new GrafoMA(6, true);
+const graph = new GrafoMA(6, true);
 
-warshallGraph.aresta(0, 1);
-warshallGraph.aresta(1, 2);
-warshallGraph.aresta(2, 3);
-warshallGraph.aresta(1, 4);
-warshallGraph.aresta(2, 5);
+graph.aresta(0, 1);
+graph.aresta(1, 2);
+graph.aresta(2, 3);
+graph.aresta(1, 4);
+graph.aresta(2, 5);
 
-warshallGraph.exibirGrafo();
-
-warshallGraph.warshallAlgorithm();
-
-warshallGraph.exibirGrafo();
+graph.exibirGrafo();
+graph.warshallAlgorithm();
+graph.exibirMatrixAcessibilidade();

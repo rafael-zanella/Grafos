@@ -12,17 +12,19 @@ class GrafoMA {
     }
  
     this.vertices = new Set();
+    this.matrixAcessibilidade = [];
   }
  
 
   warshallAlgorithm() {
-    // matrix = matriz de adjacencia de um grafo direcionado G sem arcos paralelos (loop)
-
     const n = this.grafo.length;
+    this.matrixAcessibilidade = this.grafo;
     for (let k = 0; k < n; k++) {
       for (let i = 0; i < n; i++) {
         for (let j = 0; j < n; j++) {
-          this.grafo[i][j] = this.grafo[i][j] || ( this.grafo[i][k] && this.grafo[k][j] );
+          this.matrixAcessibilidade[i][j] = (
+            this.matrixAcessibilidade[i][j] || ( this.matrixAcessibilidade[i][k] && this.matrixAcessibilidade[k][j] )
+          );
         }
       }
     }
@@ -85,6 +87,18 @@ class GrafoMA {
     } else {
       console.log('O grafo não possui a aresta informada');
     }
+  }
+
+  exibirMatrixAcessibilidade() {
+    console.log('\n\n');
+    for(let i = 0; i < this.matrixAcessibilidade.length; i++) {
+      let linha = '';
+      for(let j = 0; j < this.matrixAcessibilidade.length; j++) {
+        linha = linha + ' ' + this.matrixAcessibilidade[i][j];
+      }
+      console.log(linha);
+    }
+    console.log('\n\n');
   }
 
   exibirGrafo() {
