@@ -1,3 +1,5 @@
+const { dijkstra } = require('../Dijkstra/');
+
 class GrafoMA {
   constructor(quantidadeVertices, isDirecionado) {
     this.quantidadeVertices = quantidadeVertices;
@@ -15,6 +17,10 @@ class GrafoMA {
     this.matrixAcessibilidade = [];
   }
  
+
+  dijkstraFind(start) {
+    dijkstra(this.grafo, start);
+  }
 
   warshallAlgorithm() {
     const n = this.grafo.length;
@@ -71,10 +77,10 @@ class GrafoMA {
     return listaDeArestas;
   }
  
-  aresta(vertice1, vertice2) {
-    this.grafo[vertice1][vertice2] = 1;
+  aresta(vertice1, vertice2, distance = 1) {
+    this.grafo[vertice1][vertice2] = distance;
     
-    if (!this.isDirecionado) this.grafo[vertice2][vertice1] = 1;
+    if (!this.isDirecionado) this.grafo[vertice2][vertice1] = distance;
 
     this.vertices.add(vertice1);
     this.vertices.add(vertice2);
