@@ -1,7 +1,7 @@
 const { dijkstra } = require('../Dijkstra/');
 
 class GrafoMA {
-  constructor(quantidadeVertices, isDirecionado) {
+  constructor(quantidadeVertices, isDirecionado, algoritmo = null) {
     this.quantidadeVertices = quantidadeVertices;
     this.isDirecionado = isDirecionado;
  
@@ -10,7 +10,9 @@ class GrafoMA {
     for(let i = 0; i < quantidadeVertices; i++) {
       this.grafo[i] = [];
       this.grafo[i].length = quantidadeVertices;
-      this.grafo[i].fill(0);
+      algoritmo === "floyd-warshall" 
+        ? this.grafo[i].fill(Infinity) 
+        : this.grafo[i].fill(0);
     }
  
     this.vertices = new Set();
@@ -34,6 +36,51 @@ class GrafoMA {
         }
       }
     }
+  }
+
+  adicionaZeroNaDiagonaPrincipal(grafo) {
+
+    const n = grafo.length;
+    let A = grafo;
+
+    for (let i = 0; i < n; i++) {
+      for (let j = 0; j < n; j++) {
+        if (i === j) {
+          A[i][j] = 0;
+        }
+      }
+    }
+
+    return A;
+  }
+
+  floydWarshallAlgorithm() {
+
+    const n = this.grafo.length;
+    const A = this.adicionaZeroNaDiagonaPrincipal(this.grafo);
+
+    for (let k = 0; k < n; k++) {
+      for (let i = 0; i < n; i++) {
+        for (let j = 0; j < n; j++) {
+          if(A[i][j] > (A[i][k] + A[k][j])) {
+            A[i][j] = (A[i][k] + A[k][j])
+          }
+        }
+      }
+      console.log(`k = ${k}`);
+      this.exibirGrafoGenerico(A);
+   }
+ }
+
+  exibirGrafoGenerico(grafo) {
+    for(let i = 0; i < grafo.length; i++) {
+      let linha = '';
+      for(let j = 0; j < grafo.length; j++) {
+        linha = linha + ' ' + grafo[i][j];
+      }
+      console.log(linha);
+    }
+    console.log('');
   }
 
   grauMedio() {

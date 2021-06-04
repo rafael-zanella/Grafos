@@ -38,7 +38,7 @@ graph.warshallAlgorithm();
 graph.exibirMatrixAcessibilidade();
 */
 
-
+/*
 // TESTE DO ALGORITMO DE DIJKSTRA
 const graph = new GrafoMA(6, true);
 
@@ -54,3 +54,16 @@ graph.aresta(4, 5, 1);
 
 graph.exibirGrafo();
 graph.dijkstraFind(2)
+*/
+
+// TESTE ALGORITMO DE FLOYD WARSHALL
+const graph = new GrafoMA(5, true, "floyd-warshall");
+
+graph.aresta(1, 2, 8);
+graph.aresta(1, 4, 1);
+graph.aresta(2, 3, 1);
+graph.aresta(3, 1, 4);
+graph.aresta(4, 2, 2);
+graph.aresta(4, 3, 9);
+
+graph.floydWarshallAlgorithm();
